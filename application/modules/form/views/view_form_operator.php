@@ -67,7 +67,12 @@
                             </div>
                             <div class="row-form clearfix">
                                 <div class="span3">KABUPATEN/KOTA </div>
-                                <div class="span7"><input name="ds[kabupaten]" id="kabupaten" placeholder="KABUPATEN/KOTA" type="text"/></div>
+                                <div class="span7">
+                                    <select name="ds[kabupaten]" id="kabupaten">
+                                        <option value="">Pilih Kabupaten/Kota</option>
+                                        <option value="Yogyakarta">Yogyakarta</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row-form clearfix">
                                 <div class="span3">PROVINSI</div>
@@ -114,11 +119,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="span6">
-                            <div class="row-form clearfix">
-                                <div class="span12" style="text-align:right; font-size:14px; font-weight:bold">Registration closes in <span id="time">05:00</span> minutes!</div>
-                            </div>
                             <div class="row-form clearfix">
                                 <div class="span3"><b>NO TELP/HP (aktif)</b></div>
                                 <div class="span7"><input name="ds[telp]" id="telp" placeholder="NO TELP/HP (aktif)" type="text"/></div>
@@ -134,6 +134,23 @@
                             <div class="row-form clearfix">
                                 <div class="span3"><b>TANGGAL LAHIR</b></div>
                                 <div class="span7"><input class="datepicker" name="ds[tanggal_lahir]" id="start" placeholder='TANGGAL LAHIR' type="text"/></div>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="row-form clearfix">
+                                <div class="span12" style="text-align:right; font-size:14px; font-weight:bold">Registration closes in <span id="time">05:00</span> minutes!</div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3"><b>NO.IJAZAH</b></div>
+                                <div class="span7"><input name="ds[no_ijazah]" id="no_ijazah" placeholder="NO.IJAZAH" type="text"/></div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3"><b>NO.BPKB (Kendaraan Roda dua)</b></div>
+                                <div class="span7"><input name="ds[no_bpkb]" id="no_bpkb" placeholder="NO.BPKB (Kendaraan Roda dua)" type="text"/></div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3"><b>NO.SIM</b></div>
+                                <div class="span7"><input name="ds[no_sim]" id="no_sim" placeholder="NO.SIM" type="text"/></div>
                             </div>
                             <div class="row-form clearfix">
                                 <div class="span12" style="text-align:center"><b><u>PENDIDIKAN</u></b></div>
@@ -167,6 +184,13 @@
                                 </div>
                             </div>
                             <div class="row-form clearfix">
+                                <div class="span3"><b>PENGALAMAN KERJA</b></div>
+                                <div class="span7">
+                                    <textarea name="ds[pengalaman]" id="pengalaman"></textarea><br>
+                                    <span style='font-size:10px'><i>*Tuliskan secara singkat pegalaman anda dalam bidang informasi teknologi dan atau pelayanan kesejahteraan sosial</i></span>
+                                </div>
+                            </div>
+                            <div class="row-form clearfix">
                                 <div class="span3"><b>LAMANYA</b></div>
                                 <div class="span7">
                                     <select name="ds[lama_kerja]" id="lama_kerja">
@@ -181,8 +205,14 @@
                                 <div class="span12" style="text-align:center"><b><u>KEAHLIAN LAIN</u></b></div>
                             </div>
                             <div class="row-form clearfix">
-                                <div class="span3"><b>KEAHLIAN LAIN</b></div>
-                                <div class="span7"><textarea name="ds[keahlian]" id="item_desc"></textarea></div>
+                                <div class="span3"><b>KOMPUTER</b></div>
+                                <div class="span7">
+                                    <input type="checkbox" name="keahlian[]" value="Aplikasi Perkantoran & Internet">&nbsp;Aplikasi Perkantoran & Internet<br>
+                                    <input type="checkbox" name="keahlian[]" value="Jaringan (wire & wireless)">&nbsp;Jaringan (wire & wireless)<br>
+                                    <input type="checkbox" name="keahlian[]" value="Database manajemen, Statistika">&nbsp;Database manajemen, Statistika<br>
+                                    <input type="checkbox" name="keahlian[]" value="Programming (database & internet)">&nbsp;Programming (database & internet)<br>
+                                    <input type="checkbox" name="keahlian[]" value="Design (grafis, film, animasi)">&nbsp;Design (grafis, film, animasi)<br>
+                                </div>
                             </div>
                             <div class="row-form clearfix">
                                 <div class="span12" style="text-align:center"><b><u>KONTRAK DENGAN PIHAK LAIN</u></b></div>
@@ -192,14 +222,18 @@
                                 <div class="span7">
                                     <select name="ds[kontrak]" id="kontrak">
                                         <option value="">Pilih</option>
-                                        <option value="Ya">Ya</option>
+                                        <option value="Ya1">Ya (Bersedia putus jika diterima)</option>
+                                        <option value="Ya2">Ya (Tidak bersedia putus jika diterima)</option>
                                         <option value="Tidak">Tidak</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row-form clearfix">
-                                <div class="span3"><b>UPLOAD FILE</b></div>
-                                <div class="span7"><input type="file" name="file" id="file"></div>
+                                <div class="span3"><b>UPLOAD CV ANDA</b></div>
+                                <div class="span7">
+                                    <input type="file" name="file" id="file"><br>
+                                    <span style='font-size:10px'><i>*File harus .doc, max-size: 5mb</i></span>
+                                </div>
                             </div>
                             <input type="hidden" class="duration" name="ds[duration]">
                         </div>

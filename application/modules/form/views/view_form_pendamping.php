@@ -43,6 +43,14 @@
                                 </div>
                             </div>
                             <div class="row-form clearfix">
+                                <div class="span3"><b>KECAMATAN PENDAMPING</b></div>
+                                <div class="span7">
+                                    <select name="ds[kecamatan_pendamping]" class="kecamatan_lokasi">
+                                        <option value="">Pilih Kecamatan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row-form clearfix">
                                 <div class="span3"><b>NAMA LENGKAP DAN GELAR</b></div>
                                 <div class="span7"><input name="ds[nama]" id="nama" placeholder="NAMA LENGKAP DAN GELAR" type="text"/></div>
                             </div>
@@ -64,15 +72,17 @@
                             </div>
                             <div class="row-form clearfix">
                                 <div class="span3">KECAMATAN</div>
-                                <div class="span7">
-                                    <select name="ds[kecamatan]" class="kecamatan">
-                                        <option value="">Pilih Kecamatan</option>
-                                    </select>
-                                </div>
+                                <div class="span7"><input name="ds[kecamatan]" id="kecamatan" placeholder="KECAMATAN" type="text"/></div>
                             </div>
                             <div class="row-form clearfix">
                                 <div class="span3">KABUPATEN/KOTA </div>
-                                <div class="span7"><input name="ds[kabupaten]" id="kabupaten" placeholder="KABUPATEN/KOTA" type="text"/></div>
+                                <div class="span7">
+                                    <select name="ds[kabupaten]" id="kabupaten">
+                                        <option value="">Pilih Kabupaten/Kota</option>
+                                        <option value="Sleman">Sleman</option>
+                                        <option value="Bantul">Bantul</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row-form clearfix">
                                 <div class="span3">PROVINSI</div>
@@ -124,11 +134,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="span6">
-                            <div class="row-form clearfix">
-                                <div class="span12" style="text-align:right; font-size:14px; font-weight:bold">Registration closes in <span id="time">05:00</span> minutes!</div>
-                            </div>
                             <div class="row-form clearfix">
                                 <div class="span3"><b>NO TELP/HP (aktif)</b></div>
                                 <div class="span7"><input name="ds[telp]" id="telp" placeholder="NO TELP/HP (aktif)" type="text"/></div>
@@ -144,6 +149,23 @@
                             <div class="row-form clearfix">
                                 <div class="span3"><b>TANGGAL LAHIR</b></div>
                                 <div class="span7"><input class="datepicker" name="ds[tanggal_lahir]" id="start" placeholder='TANGGAL LAHIR' type="text"/></div>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="row-form clearfix">
+                                <div class="span12" style="text-align:right; font-size:14px; font-weight:bold">Registration closes in <span id="time">05:00</span> minutes!</div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3"><b>NO.IJAZAH</b></div>
+                                <div class="span7"><input name="ds[no_ijazah]" id="no_ijazah" placeholder="NO.IJAZAH" type="text"/></div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3"><b>NO.BPKB (Kendaraan roda dua)</b></div>
+                                <div class="span7"><input name="ds[no_bpkb]" id="no_bpkb" placeholder="NO.BPKB (Kendaraan Roda dua)" type="text"/></div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3"><b>NO.SIM</b></div>
+                                <div class="span7"><input name="ds[no_sim]" id="no_sim" placeholder="NO.SIM" type="text"/></div>
                             </div>
                             <div class="row-form clearfix">
                                 <div class="span12" style="text-align:center"><b><u>PENDIDIKAN</u></b></div>
@@ -178,6 +200,13 @@
                                 </div>
                             </div>
                             <div class="row-form clearfix">
+                                <div class="span3"><b>PENGALAMAN KERJA</b></div>
+                                <div class="span7">
+                                    <textarea name="ds[pengalaman]" id="pengalaman"></textarea><br>
+                                    <span style='font-size:10px'><i>*Tuliskan secara singkat pegalaman anda dalam penanganan dan pelayanan bidang kesejahteraan sosial</i></span>
+                                </div>
+                            </div>
+                            <div class="row-form clearfix">
                                 <div class="span3"><b>LAMANYA</b></div>
                                 <div class="span7">
                                     <select name="ds[lama_kerja]" id="lama_kerja">
@@ -194,11 +223,11 @@
                             <div class="row-form clearfix">
                                 <div class="span3"><b>KOMPUTER</b></div>
                                 <div class="span7">
-                                    <select name="ds[keahlian]" id="keahlian">
-                                        <option value="Tidak">Tidak</option>
-                                        <option value="Office">Office</option>
-                                        <option value="Office+Internet">Office & Internet</option>
-                                    </select>
+                                    <input type="checkbox" name="keahlian[]" value="Aplikasi Perkantoran & Internet">&nbsp;Aplikasi Perkantoran & Internet<br>
+                                    <input type="checkbox" name="keahlian[]" value="Jaringan (wire & wireless)">&nbsp;Jaringan (wire & wireless)<br>
+                                    <input type="checkbox" name="keahlian[]" value="Database manajemen, Statistika">&nbsp;Database manajemen, Statistika<br>
+                                    <input type="checkbox" name="keahlian[]" value="Programming (database & internet)">&nbsp;Programming (database & internet)<br>
+                                    <input type="checkbox" name="keahlian[]" value="Design (grafis, film, animasi)">&nbsp;Design (grafis, film, animasi)<br>
                                 </div>
                             </div>
                             <div class="row-form clearfix">
@@ -209,14 +238,18 @@
                                 <div class="span7">
                                     <select name="ds[kontrak]" id="kontrak">
                                         <option value="">Pilih</option>
-                                        <option value="Ya">Ya</option>
+                                        <option value="Ya1">Ya (Bersedia putus jika diterima)</option>
+                                        <option value="Ya2">Ya (Tidak bersedia putus jika diterima)</option>
                                         <option value="Tidak">Tidak</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row-form clearfix">
-                                <div class="span3"><b>UPLOAD FILE</b></div>
-                                <div class="span7"><input type="file" name="file" id="file"></div>
+                                <div class="span3"><b>UPLOAD CV ANDA</b></div>
+                                <div class="span7">
+                                    <input type="file" name="file" id="file"><br>
+                                    <span style='font-size:10px'><i>*File harus .doc, max-size: 5mb</i></span>
+                                </div>
                             </div>
                             <input type="hidden" class="duration" name="ds[duration]">
                         </div>
@@ -273,12 +306,18 @@
         $('#kategori_kabupaten').change(function(){
             var dt = $(this).val();
             if (dt=='Sleman') {
-                opsi = '<option value="Turi">Turi</option>';
+                opsi = '<option value="">Pilih Kecamatan</option><option value="Turi">Turi</option>';
             } else{
-                opsi = '<option value="Pundong">Pundong</option><option value="Piyungan">Piyungan</option><option value="Bambanglipuro">Bambanglipuro</option><option value="Pleret">Pleret</option><option value="Banguntapan">Banguntapan</option>';
+                opsi = '<option value="">Pilih Kecamatan</option><option value="Pundong">Pundong</option><option value="Piyungan">Piyungan</option><option value="Bambanglipuro">Bambanglipuro</option><option value="Pleret">Pleret</option><option value="Banguntapan">Banguntapan</option>';
             };
-            $('.kecamatan').html(opsi);
-            $('.kecamatan_domisili').html(opsi);
+            if (dt=='Sleman') {
+                opsi_domisili = '<option value="">Pilih Kecamatan</option><option value="Turi">Turi</option><option value="Berbah">Berbah</option><option value="Cangkringan">Cangkringan</option><option value="Depok">Depok</option><option value="Gamping">Gamping</option><option value="Godean">Godean</option><option value="Kalasan">Kalasan</option><option value="Minggir">Minggir</option><option value="Mlati">Mlati</option><option value="Moyudan">Moyudan</option><option value="Ngaglik">Ngaglik</option><option value="Ngemplak">Ngemplak</option><option value="Pakem">Pakem</option><option value="Prambangan">Prambangan</option><option value="Seyegan">Seyegan</option><option value="Sleman">Sleman</option><option value="Tempel">Tempel</option>'
+            ;
+            } else{
+                opsi_domisili = '<option value="">Pilih Kecamatan</option><option value="Piyungan">Piyungan</option><option value="Sedayu">Sedayu</option><option value="Pundong">Pundong</option><option value="Banguntapan">Banguntapan</option><option value="Jetis">Jetis</option><option value="Pleret">Pleret</option><option value="Bambanglipuro">Bambanglipuro</option><option value="Sewon">Sewon</option><option value="Imogiri">Imogiri</option><option value="Kretek">Kretek</option><option value="Sanden">Sanden</option><option value="Srandakan">Srandakan</option><option value="Pandak">Pandak</option><option value="Pajangan">Pajangan</option><option value="Kasihan">Kasihan</option><option value="Bantul">Bantul</option><option value="Dlingo">Dlingo</option>'
+            };
+            $('.kecamatan_lokasi').html(opsi);
+            $('.kecamatan_domisili').html(opsi_domisili);
         })
         $('.check').click(function(){
             var nik = $('#nik').val();

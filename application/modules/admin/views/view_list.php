@@ -31,7 +31,7 @@
                                 <th>Nama Pendaftar</th>
                                 <th>Nilai</th>
                                 <th>Durasi</th>
-                                <th class="center" width="12%">Action</th>
+                                <th class="center" width="20%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,11 +39,16 @@
                             <tr>                                    
                                 <td class="center"><?=$i?></td>
                                 <td><?=$val['id']?></td>
-                                <td><?=date_formater($val['dateTime'])?></td>
+                                <td><?=date('d M, Y H:i:s',strtotime($val['dateTime']))?></td>
                                 <td><?=$val['nama']?></td>
                                 <td><?=$val['point']?></td>
                                 <td><?=$val['duration']?> Seconds</td>
-                                <td class="center"><a href='<?=base_url()?>admin/download/<?=$val['id']?>' class="btn btn-small btn-primary add" type="button"><span class="isw-print"></span>&nbsp;Download</a></td>
+                                <td class="center">
+                                    <a href='<?=base_url()?>admin/download/<?=$val['id']?>' class="btn btn-small btn-primary add" type="button"><span class="isw-print"></span>&nbsp;Download</a>
+                                    <?php if (!empty($val['file'])): ?>
+                                        <a href='#' tval='<?=base_url()?>files/<?=$val['file']?>' class="btn btn-small btn-warning download" type="button"><span class="isw-print"></span>&nbsp;Biodata</a>
+                                    <?php endif ?>
+                                </td>
                             </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -54,81 +59,11 @@
     </div>  
     <div class="dr"><span></span></div>
 </div>
-
-<style type="text/css">
-    .tt{
-        float: left;
-        font-weight: bold;
-    }
-    .ttd{
-        margin-left: 22%;
-    }
-</style>
-
 <script type="text/javascript">
     $(function(){
-        $('.view').click(function(){
-            $(".name").html($(this).attr('tname'));
-            $(".group_id").html($(this).attr('tgroup'));
-            $(".email").html($(this).attr('temail'));
-            $(".address").html($(this).attr('taddress'));
-            $(".post_code").html($(this).attr('tpost_code'));
-            $(".phone_number").html($(this).attr('tphone'));
-        })
-
-        $('.cancel').click(function(){
-            $('.form_input').slideUp();
-            $(".mode_edit").fadeOut();
-            $(".table_content").fadeIn();
-
-            var action = "";
-            $('#form_input').attr('action',action);
-
-            $("#email").val("");
-            $("#group_id").val("");
-
-            return false;
-        })
-
-        $(".edit").click(function(){
-            $('.form_input').slideDown();
-            $(".mode_edit").fadeIn();
-            $(".table_content").fadeOut();
-
-            $("#email").val($(this).attr('temail')).focus();
-            $("#group_id").val($(this).attr('tgroup')).focus();
-            $("#mode_edit").fadeIn();
-
-            var action = $(this).attr('href');
-            $('#form_input').attr('action',action);
-            return false;
-        })
-
-        $("#form_input").validate({
-            rules: {
-                'ds[email]'  : {'required'  : true,'email' : true},
-                'ds[group_id]' : 'required',
-            },
-        });
-
-        $('#tSortable').dataTable( {
-            "sPaginationType": "bootstrap",
-            'bPaginate' : true,
-            "bLengthChange": true,
-            "bInfo": false,
-            "oLanguage": {
-                "sLengthMenu": "_MENU_ records per page"
-            }
-        } );
-
-        $(".enable").change(function(){
-            var url = "<?=base_url()?>member/adm_member/enable/"+$(this).attr('uid')+'/';
-            if ($(this).is(':checked')){
-                url += '1';
-            }else{
-                url += '0';
-            }
-            $.get(url);
+        $('.download').click(function(){
+            var data = $(this).attr('tval');
+            window.location.href = data;
         })
     })
 </script>

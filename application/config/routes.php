@@ -38,9 +38,10 @@
 |
 */
 
-$route['default_controller'] 	= "welcome";
+$route['default_controller'] 	= "form";
 $route['app-admin'] 		= "adm_login";
 $route['home-admin'] 		= "admin";
+$route['home'] 				= "form";
 $route['app-admin/logout'] 	= "adm_login/logout";
 
 // $route['app-member'] 			= "member_user/login";

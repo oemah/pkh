@@ -7,6 +7,14 @@ class Form extends CI_Controller {
 		$this->load->model('model_form');
 	}
 
+	function index()
+	{
+		$data['title']	= 'Home';
+		$data['main'] = "view_home";
+		$data['dt'] = $this->model_form->getNews()->result_array();
+		$this->load->view('template',$data);
+	}
+
 	function pendamping()
 	{
 		$data['title']	= 'Form Seleksi Pendamping';
@@ -29,68 +37,63 @@ class Form extends CI_Controller {
 			$data = $_POST['ds'];
 			$category = $data['category_id'];
 			$point = 0;
-			if ($category == 'pendamping') {
-				// point domisili
-				if ($data['kategori_kabupaten'] == $data['kabupaten_domisili']) {
-					$point += 5;
-				}elseif($data['kategori_kabupaten'] != $data['kabupaten_domisili']){
-					$point += 1;
-				}else{
-					$point += 0;
-				}
-				// point pendidikan
-				if ($data['jenjang_pendidikan'] == 'Sosial') {
-					$point += 5;
-				}elseif($data['jenjang_pendidikan'] == 'NonSosial'){
-					$point += 1;
-				}
-				// point pengalaman
-				if ($data['lama_kerja'] != 0) {
-					$point += 1;
-				}
-				if ($data['lama_kerja'] == 3) {
-					$point += 5;
-				}elseif($data['lama_kerja'] == 2){
-					$point += 3;
-				}elseif($data['lama_kerja'] == 1){
-					$point += 1;
-				}else{
-					$point += 0;
-				}
-				// point terikat
-				if ($data['kontrak'] == 'Tidak') {
-					$point += 5;
-				}
-			}else{
-				// point pendidikan
-				if ($data['jenjang_pendidikan'] == 'Teknik') {
-					$point += 5;
-				}elseif($data['jenjang_pendidikan'] == 'NonTeknik'){
-					$point += 1;
-				}else{
-					$point += 0;
-				}
-				// point pengalaman
-				if ($data['lama_kerja'] != 0) {
+			// point
+			if (!empty($data['kategori_kabupaten']) && $data['kategori_kabupaten'] == $data['kabupaten']) {
+				$point += 5;
+			}elseif($data['kategori_kabupaten'] != $data['kabupaten']){
+				$point += 1;
+			}
+			if ($data['kontrak'] == 'Tidak') {
+				$point += 5;
+			}elseif($data['kontrak'] == 'Ya1'){
+				$point += 5;
+			}elseif($data['kontrak']=='Ya2'){
+				$point += 0;
+			}
+			if ($data['jenjang_pendidikan'] == 'D3') {
+				$point += 1;
+			}elseif($data['jenjang_pendidikan'] == 'D4' OR $data['jenjang_pendidikan'] == 'S1' OR $data['jenjang_pendidikan']=='S2/S3'){
+				$point += 2;
+			}
+			if ($data['lama_kerja'] != 0) {
+				$point += 1;
+			}
+			if ($data['lama_kerja'] == 3) {
+				$point += 5;
+			}elseif($data['lama_kerja'] == 2){
+				$point += 3;
+			}elseif($data['lama_kerja'] == 1){
+				$point += 1;
+			}
+			if ($category=='pendamping') {
+				if ($data['jurusan_pendidikan'] == 'Sosial') {
+					$point += 2;
+				}elseif($data['jurusan_pendidikan'] == 'NonSosial'){
 					$point += 1;
 				}
-				if ($data['lama_kerja'] == 3) {
+				if (!empty($data['kecamatan_pendamping']) && $data['kecamatan_pendamping'] == $data['kecamatan_domisili']) {
 					$point += 5;
-				}elseif($data['lama_kerja'] == 2){
-					$point += 3;
-				}elseif($data['lama_kerja'] == 1){
+				}elseif($data['kecamatan_pendamping'] != $data['kecamatan_domisili']){
 					$point += 1;
-				}else{
-					$point += 0;
 				}
-				// point terikat
-				if ($data['kontrak'] == 'Tidak') {
-					$point += 5;
+			} else {
+				if ($data['jurusan_pendidikan'] == 'Teknik') {
+					$point += 2;
+				}elseif($data['jurusan_pendidikan'] == 'NonTeknik'){
+					$point += 1;
 				}
+			}
+			$skill ='';
+			if(!empty($_POST['keahlian'])){
+				$sk = $_POST['keahlian'];
+				foreach ($sk as $val) {
+					$skill .= $val.', ';
+				}	
 			}
 			$dtpoint = array(
 						'point'=>$point,
-						'dateTime'=>date('Y-m-d H:i:s')
+						'dateTime'=>date('Y-m-d H:i:s'),
+						'keahlian'=>$skill
 					);
 			$dtinsert = array_merge($data,$dtpoint);
 
@@ -114,42 +117,32 @@ class Form extends CI_Controller {
 
 	function upload()
 	{
-		$allowedExts = array("pdf", ".doc", ".docx");
-		$temp = explode(".", $_FILES["file"]["name"]);
-		$extension = end($temp);
+		$allowedExts = array("pdf", "doc", "docx");
+		$extension = end(explode(".", $_FILES["file"]["name"]));
 		if (($_FILES["file"]["type"] == "application/pdf")
 			|| ($_FILES["file"]["type"] == "application/msword")
-			|| ($_FILES["file"]["type"] == "application/msword")
-			&& ($_FILES["file"]["size"] < 10000)
+			|| ($_FILES["file"]["type"] == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+			&& ($_FILES["file"]["size"] < 5000)
 			&& in_array($extension, $allowedExts))
-		{
-			if ($_FILES["file"]["error"] > 0)
 			{
-				return "Return Code: " . $_FILES["file"]["error"] . "<br>";
-			}
-			else
-			{
-				echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-				echo "Type: " . $_FILES["file"]["type"] . "<br>";
-				echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-				echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
-
-				if (file_exists("files/" . $_FILES["file"]["name"]))
+				if ($_FILES["file"]["error"] > 0)
 				{
-					return false;
+					return "Return Code: " . $_FILES["file"]["error"] . "<br>";
 				}
 				else
 				{
-					move_uploaded_file($_FILES["file"]["tmp_name"],
-						"files/" . $_FILES["file"]["name"]);
-					return $_FILES["file"]["name"];
+					if (file_exists("files/" . $_FILES["file"]["name"]))
+					{
+						return false;
+					}
+					else
+					{
+						move_uploaded_file($_FILES["file"]["tmp_name"],
+							"files/" . $_FILES["file"]["name"]);
+						return $_FILES["file"]["name"];
+					}
 				}
 			}
-		}
-		else
-		{
-			return false;
-		}
 	}
 
 	function checkavailable($nik=null){

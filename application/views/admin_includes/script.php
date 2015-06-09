@@ -28,7 +28,7 @@ $(function() {
 	    }
 	})();
 	$( ".datepicker" ).datepicker({
-		yearRange: "-70:+0",
+		yearRange: "-35:-19",
 		changeMonth: true,
 		changeYear: true,
 		dateFormat: "dd-mm-yy"
